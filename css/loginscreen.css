@@ -1,5 +1,8 @@
-nav,.right-section,.background-pic,.login{
+nav,.right-section,.login{
         display:none !important;  
+}
+.background-pic{
+    background : url("../images/world-cup-winning.jpg")
 }
 .homescreen{
     display:block;
@@ -54,7 +57,7 @@ h1 {
 }
 .homevideo button, .btn { 
 	display: block;
-	width: 45%;
+	width: auto;
 	border: none; 
 	margin: 1rem auto; 
 	font-size: 1.3rem;

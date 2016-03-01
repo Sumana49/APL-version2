@@ -4,7 +4,7 @@ var forgotPasswordCtrl = function ($scope, $rootScope, $location, Authentication
     $scope.dataLoading = false;
     var error = {
 		SERVICE_FAILURE : "Something went wrong. Please try again in sometime",
-        OTP_SUCCESS : "A link has been sent to your mail"
+        OTP_SUCCESS : "Kindly check your inbox"
 	};
     function errorDisplay(errorMessage){
         $scope.dataLoading = false;
