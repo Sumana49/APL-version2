@@ -1,0 +1,115 @@
+var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$stateParams,AuthenticationService,matchService,leaderBoard){
+	$scope.showHeading = true;
+	$scope.getRecentMatchHistory = getRecentMatchHistory;
+	$scope.getLeaderBoardCredentials = getLeaderBoardCredentials;
+	$scope.getLeaderBoardTeamDetails = getLeaderBoardTeamDetails;
+	$scope.getCurrentMatchData = getCurrentMatchData;
+	$scope.dataLoading = false;
+	$scope.isFromLeaderBoard = false;
+	$scope.noHistory = false;
+	var leaderBoardCredentials,teamId,key;
+	var noHistoryFlag = false;
+	var error = {
+		SERVICE_FAILURE : "Something went wrong. Please try again in sometime"
+	}
+    function init(){
+		getRecentMatchHistory();
+		leaderBoard.getLeaderBoard().then(function(data){
+          $scope.leaderBoardContent = data;  
+        });
+    }
+    init();
+	
+	//Function show error
+	function errorDisplay(errorMessage){
+		$('html, body').animate({
+			scrollTop: $("body").offset().top
+		}, 1000);
+		$scope.showError = true;
+		$scope.errorMessage = errorMessage;	
+		 $timeout(function(){
+             $scope.showError = false;
+         }, 5000);
+	};
+	function getLeaderBoardCredentials(){
+		$rootScope.leaderBoardTeamDetails = $cookieStore.get('leaderBoardTeamDetails') || {};
+		leaderBoardCredentials = $rootScope.leaderBoardTeamDetails;
+	}
+	
+	function getRecentMatchHistory(){
+		getLeaderBoardCredentials();
+		if(Object.keys(leaderBoardCredentials).length == 0){
+			$rootScope.teamDetails = $cookieStore.get('teamDetails') || {};
+        	teamId = $rootScope.teamDetails.teamId || "";
+			$scope.teamName = $rootScope.teamDetails.teamName || "";
+			key = false;
+		}
+		else{
+			teamId = leaderBoardCredentials.teamId;
+			$scope.teamName = leaderBoardCredentials.teamName || "";
+			$scope.isFromLeaderBoard = true;
+			key = true;
+		}
+		$scope.dataLoading = true;
+		$http.get(URLBASE + "getRecentMatchHistory?teamId="+teamId).success(function(response) {
+            if(response.type == "success"){
+				$scope.showHeading = true;
+				$scope.noHistory = false;
+				$scope.historyData = response.data;
+				if(response.data.length == 0){
+					//$scope.noHistory = true;
+					//$scope.showHeading = false;
+					noHistoryFlag = true;
+				}
+				//getCurrentMatchData(noHistoryFlag);
+				$scope.dataLoading = false;
+			}
+			else{
+				$scope.historyData = [];
+				$scope.dataLoading = false;
+				$scope.noHistory = true;
+				$scope.showHeading = false;
+			}
+		}).error(function(response, status, headers, config) {
+				errorDisplay(error.SERVICE_FAILURE);
+		});
+	};
+	function getCurrentMatchData(noHistoryFlag){
+		$http.get(URLBASE + "getCurrentMatchDetails").success(function(response) {
+            if(response.type == "success"){
+				$scope.currentMatachData = response.data;
+				//$scope.noHistory = false;
+				//$scope.showHeading = true;
+				if(noHistoryFlag && response.data.length == 0){
+					$scope.noHistory = true;
+					$scope.showHeading = false;
+				}
+			}
+			else{
+				$scope.currentMatachData = [];
+			}
+		}).error(function(response, status, headers, config) {
+				errorDisplay(error.SERVICE_FAILURE);
+		});
+	};
+	$scope.viewPlayerHistory = function(content){
+		//matchService.putMatchIdDetails(content.matchId,teamId,key);
+		$state.go('playerHistory',{matchId:content.matchId,teamId:teamId,key:key,points:content.points});
+	};
+	$scope.backToLeaderBoard = function(){
+		AuthenticationService.clearLeaderBoardCredentials();
+		$state.go('leaderBoard');
+	}
+	$scope.closeError = function(){
+		$scope.showError = false;		
+	};
+	
+	
+	function getLeaderBoardTeamDetails(content){
+		var teamId = content.teamId;
+		var teamName = content.teamName;
+		AuthenticationService.SetLeaderBoardTeamDetails(teamId,teamName);
+		$rootScope.leaderBoardTeamDetails = $cookieStore.get('leaderBoardTeamDetails') || {};
+		$state.go('historyLeader',{teamId:teamId});
+	};
+}

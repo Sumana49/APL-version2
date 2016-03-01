@@ -1,0 +1,46 @@
+<div class="left-section">	
+	<div class="content-section" id="my-team">
+	   <div class="loading-main" ng-show="dataLoading">
+		  <img src="../images/loading.gif"/>
+		  <span>Please wait...</span>
+	   </div>
+	   <div class="error-container" ng-show="showError" ng-animate="'fade'">
+		  <p class="error-msg">{{errorMessage}}</p>
+		  <span ng-click="closeError()" class="icon-cancel-circle"></span>
+	   </div>
+		<p class="back back-history"><a ng-click="backToHistory()"><span class="icon-circle-left"></span>Back</a></p>
+		<div class="my-profile clearfix" ng-show="showHeading">
+			<div class="team-profile">
+				<span class="profile-heading">Points</span>
+				<span class="profile-value">{{totalPoints}}</span>
+			</div>
+		</div>
+		<ul class="content-container slide clearfix">
+			<li class="clearfix" ng-repeat="player in fantasyTeamHistory track by $index">
+				<img ng-src={{player.playerImage}} class="image-container"/>
+				<img src='images/bat.png' ng-show="{{player.playerTypeId}}=='1'" class="specialization"/>
+				<img src='images/ball.png' ng-show="{{player.playerTypeId}}=='2'" class="specialization"/>
+				<img src='images/bat_ball.png' ng-show="{{player.playerTypeId}}=='3'" class="specialization"/>	
+				<img src='../images/captain.png' ng-show="{{player.isCaptain}}== 1" class="is-captain"/>	
+				<div class="player-data">
+					<span>{{ player.playerName | limitTo: 13}}{{player.playerName.length > 13 ? '...' : ''}}</span>
+					<span ng-if="player.points != null">{{ player.points }}</span>
+					<span ng-if="player.points == null">0</span>
+				</div>
+			</li>
+		</ul>
+		<div ng-show="noHistory" class="no-results">
+				<img src="../images/no-results-found2.png"/>
+		</div>
+	</div>
+</div>
+<div class="right-section">
+	<div class="leader-board-heading">Leader Board</div>
+	<ul class="leader-board-content">
+		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
+			<img ng-src={{content.imageUrl}}>
+			<span><a class="underline">{{content.teamName}}</a></span>
+			<span>{{content.points}}</span>
+		</li>
+	</ul>
+</div>

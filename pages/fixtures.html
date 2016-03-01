@@ -1,0 +1,75 @@
+<link rel="stylesheet" type="text/css" href="css/fixtures.css" >  
+<div class="left-section">	
+	<div class="match-scroller clearfix" id="match-scroller">
+		<p>Points stealers</p>
+		  <ul class="scroll-content" id="scroller-div">
+			<li class="clearfix" ng-repeat="player in leadingPlayers">
+				<div class="scroll-player-images">
+					<img ng-src={{player.playerImage}}/>
+				</div>
+				<div class="scroll-details">
+					<p class="scroll-name">{{player.playerName}}</p>
+					<p class="scroll-points">{{player.points}}</p>
+					<img src='../images/imapact.png' ng-show="{{player.isImpact}}==1" class="scroll-impact"/>
+				</div>
+			</li>
+		  </ul>
+	</div>
+	<div class="content-section" id="fixtures">
+		<div class="loading-main" ng-show="dataLoading">
+		  <img src="../images/loading.gif"/>
+		  <span>Please wait...</span>
+	   </div>
+	   <div class="error-container" ng-show="showError" ng-animate="'fade'">
+		  <p class="error-msg">{{errorMessage}}</p>
+		  <span ng-click="closeError()" class="icon-cancel-circle"></span>
+	   </div>
+		<div class="fixtures">
+			<p class="fixture-heading">Fixtures</p>
+			<div>
+				<div class="fixtures-details clearfix">
+					<p>{{fixtureVenue}}</p>
+					<p>{{fixtureDate | limitTo: 10}}</p>
+				</div>
+				<ul class="fixtures-schedule">
+					<li class="clearfix" ng-repeat="content in fixtureData">
+						<label>{{content.startTime}}</label>
+						<div class="match-teams clearfix">
+							<img src="images/Hurricanes.png" ng-show="{{content.teamOneId}}=='1'"/>
+							<img src="images/Scorchers.png" ng-show="{{content.teamOneId}}=='2'"/>
+							<img src="images/strikers.png" ng-show="{{content.teamOneId}}=='3'"/>
+							<img src="images/superStar.png" ng-show="{{content.teamOneId}}=='4'"/>
+
+							<span>versus</span>
+
+							<img src="images/Hurricanes.png" ng-show="{{content.teamTwoId}}=='1'"/>
+							<img src="images/Scorchers.png" ng-show="{{content.teamTwoId}}=='2'"/>
+							<img src="images/strikers.png" ng-show="{{content.teamTwoId}}=='3'"/>
+							<img src="images/superStar.png" ng-show="{{content.teamTwoId}}=='4'"/>
+						</div>
+							<label class="center-align" ng-show="{{content.isCurrent}}==0">Yet to start</label>
+							<label class="center-align" ng-show="{{content.isCurrent}}==1"><a ng-click="inProgress()" class="underline">Select Squad</a></label>
+							<label class="center-align" ng-show="{{content.isCurrent}}==-1"><a ng-click="viewPlayerDetails(content)" class="underline">View Details</a></label>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="right-section">
+	<div class="leader-board-heading"><a ng-click="showLeaderBoardCurrent()" id="leaderBoardCurrent" class="active">Leader Board</a><a ng-click="showLeaderBoardOverall()" id="leaderBoardOverall">Overall</a></div>
+	<ul class="leader-board-content" ng-show="leaderBoard">
+		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
+			<img ng-src={{content.imageUrl}}>
+			<span><a class="underline">{{content.teamName}}</a></span>
+			<span>{{content.points}}</span>
+		</li>
+	</ul>
+    <ul class="leader-board-content" ng-show="overall">
+		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
+			<img ng-src={{content.imageUrl}}>
+			<span><a class="underline">{{content.teamName}}</a></span>
+			<span>{{content.points}}</span>
+		</li>
+	</ul>
+</div>

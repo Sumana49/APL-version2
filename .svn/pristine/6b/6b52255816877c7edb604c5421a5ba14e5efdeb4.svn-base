@@ -1,0 +1,19 @@
+<div class="homevideo">
+                    <form name="form" ng-submit="login()" role="form">
+                        <div class="form-group">
+                            <input ng-focus="removeBorder()" type="text" name="username" id="username" class="form-control" placeholder = "Avnet mail" ng-model="username" required />
+                        </div>
+                        <div class="form-group">
+                            <input ng-focus="removeBorder()" type="password" name="password" id="password" class="form-control" placeholder="Password" ng-model="password" required/>
+                        </div>
+                        <div class="form-actions clearfix">
+                            <button type="submit" class="floatLeft btn btn-danger">Login</button>
+                            <a href="#/register" class="floatRight btn btn-link">Register</a>
+                        </div>
+						<div class="loading">
+							<img ng-show="dataLoading" src="../images/load-circle.gif"/>
+						</div>
+                    </form>
+                   
+</div>
+<link rel="stylesheet" type="text/css" href="css/loginscreen.css">

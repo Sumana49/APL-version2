@@ -1,0 +1,128 @@
+<link rel="stylesheet" type="text/css" href="css/fixtures.css" > 
+<div class="left-section">	
+<div>
+   <div class="loading-main" ng-show="dataLoading">
+      <img src="../images/loading.gif"/>
+      <span>Please wait...</span>
+   </div>
+   <div class="error-container" ng-show="showError" ng-animate="'fade'">
+      <p class="error-msg">{{errorMessage}}</p>
+      <span ng-click="closeError()" class="icon-cancel-circle"></span>
+   </div>
+   <div class="create-team-link" ng-show = "createTeamLinkVisibility">
+      <div>
+         <input type="text" placeholder="Enter your team name" ng-model = "teamName" ng-keypress="keyPress($event)"/>
+         <input type="button" class="create-icon main-link" ng-click = "createFantasyTeam()" value="{{createTeamButton}}"/>	
+      </div>
+   </div>
+</div>
+<div ng-show = "showCreateTeamVisibility" class="content-section create-team">
+   <p class="back"><a ng-click="backToHome()"><span class="icon-circle-left"></span>Back</a></p>
+   <div class="match-scroller clearfix" id="match-scroller">
+		<p>Match Fixtures</p>
+		  <ul class="scroll-content fixtureData" id="scroller-div">
+			<li class="clearfix" ng-repeat="content in fixtureData">
+				<div class="scroll-player-images">
+					<img src="images/senaTransparent.png" ng-show="{{content.teamOneId}}=='1'"/>
+					<img src="images/scrochersTransparent.png" ng-show="{{content.teamOneId}}=='2'"/>
+					<img src="images/strikersTransparent.png" ng-show="{{content.teamOneId}}=='3'"/>
+					<img src="images/superStarTransparent.png" ng-show="{{content.teamOneId}}=='4'"/>
+				</div>
+				<div class="scroll-details">
+					<p class="scroll-name" ng-show="{{content.teamOneId}}=='1'">Hurricanes</p>
+					<p class="scroll-name" ng-show="{{content.teamOneId}}=='2'">Scrochers</p>
+					<p class="scroll-name" ng-show="{{content.teamOneId}}=='3'">Strikers</p>
+					<p class="scroll-name" ng-show="{{content.teamOneId}}=='4'">Super Stars</p>
+					<p>vs</p>
+					<p class="scroll-points" ng-show="{{content.teamTwoId}}=='1'">Hurricanes</p>
+					<p class="scroll-points" ng-show="{{content.teamTwoId}}=='2'">Scrochers</p>
+					<p class="scroll-points" ng-show="{{content.teamTwoId}}=='3'">Strikers</p>
+					<p class="scroll-points" ng-show="{{content.teamTwoId}}=='4'">Super Stars</p>
+				</div>
+				<div class="scroll-player-images">
+					<img src="images/senaTransparent.png" ng-show="{{content.teamTwoId}}=='1'"/>
+					<img src="images/scrochersTransparent.png" ng-show="{{content.teamTwoId}}=='2'"/>
+					<img src="images/strikersTransparent.png" ng-show="{{content.teamTwoId}}=='3'"/>
+					<img src="images/superStarTransparent.png" ng-show="{{content.teamTwoId}}=='4'"/>
+				</div>
+				<img class="stamp" ng-show="{{content.isCurrent}}==-1" src="../images/completed.png"/>
+			</li>
+		  </ul>
+	</div>
+   <div class="squad-selection clearfix">
+      <ul class="your-team" id="your-team">
+         <div data-drop="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2" jqyoui-droppable>
+            <span class="team-heading">{{fantasyTeamName}}</span>
+            <span class="drag-image" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" 
+               ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.blob_url"><img class="captain-logo" ng-src="{{list1.blob_url}}"/></span>
+            <span class="drag-image" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list2" 
+               jqyoui-draggable ng-hide="!list2.blob_url"><img class="captain-logo" ng-src="{{list2.blob_url}}"/></span>
+			 <img class="arrow" ng-show="showArrow" src="../images/arrow.png"/>
+         </div>
+         <li>
+            <form action="" class="clearfix">
+               <span class="remaining-money">
+				   <label id="remaining-amount">{{userProfile.moneyLeft}}$</label> /
+				   <label id="needed-players">{{finalSelectedPlayerList.length}}</label>
+               </span>
+               <span class="remaining-transfers">
+				   <label>Transfers : </label>
+				   <label id="remaining-transfers" ng-show="transfersCount">{{userProfile.transfersLeft}}</label>
+				   <label id="remaining-transfers" ng-show="!transfersCount">&infin;</label>   
+               </span>
+            </form>
+         </li>
+         <li class="clearfix fadein" ng-repeat="selectedPlayer in finalSelectedPlayerList track by $index" data-drop="true" data-jqyoui-options ng-model="selectedPlayer.list2" jqyoui-droppable ng-class="{'blue': selectedPlayer.selectedPlayerList.playerAplTeamId == 1 , 'yellow': selectedPlayer.selectedPlayerList.playerAplTeamId == 2 , 'red': selectedPlayer.selectedPlayerList.playerAplTeamId == 3 , 'green': selectedPlayer.selectedPlayerList.playerAplTeamId == 4}">
+            <button ng-click = "yourTeamListener(selectedPlayer)">x</button>
+            <img src='../images/bat.png' ng-show="selectedPlayer.selectedPlayerList.playerTypeId=='1'" class="img-upload"/>
+            <img src='../images/ball.png' ng-show="selectedPlayer.selectedPlayerList.playerTypeId=='2'" class="img-upload"/>
+            <img src='../images/bat_ball.png' ng-show="selectedPlayer.selectedPlayerList.playerTypeId=='3'" class="img-upload"/>
+            <span>{{ selectedPlayer.selectedPlayerList.playerName | limitTo: 14}}{{selectedPlayer.selectedPlayerList.playerName.length > 14 ? '...' : ''}}</span>
+            <span class="drag-image" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="selectedPlayer.list2" 
+               jqyoui-draggable ng-hide="!selectedPlayer.list2.blob_url"><img class="captain-logo" ng-src="{{selectedPlayer.list2.blob_url}}"/></span>
+            <span class="player-price">${{ selectedPlayer.selectedPlayerList.playerPrice }}</span>
+            <img src='../images/imapact.png' ng-show="selectedPlayer.selectedPlayerList.isImpact == 1" class="img-upload impact-player"/>
+         </li>
+      </ul>
+      <ul class="rosters" id="rosters">
+         ROSTER
+         <li class="filter clearfix">
+            <div class="form">
+               <input type="checkbox" id="hurricanes" value="hurricanes" ng-model="filterCategory.team1"/><label for="hurricanes"></label>
+               <input type="checkbox" id="scorches" value="scorches" ng-model="filterCategory.team2"/><label for="scorches"></label>
+               <input type="checkbox" id="strikers" value="strikers" ng-model="filterCategory.team3"/><label for="strikers"></label> 
+               <input type="checkbox" id="superstars" value="superstars" ng-model="filterCategory.team4"/><label for="superstars"></label>
+			   <input type="checkbox" id="impact" value="impact" ng-model="filterCategory.impact"/><label for="impact"></label>
+               <input type="checkbox" id="allRounder" value="all" ng-model="filterCategory.allrounder"/><label for="allRounder"></label>
+               <input type="checkbox" id="bowler" value="bowl" ng-model="filterCategory.bowl"/> <label for="bowler"></label>
+               <input type="checkbox" id="batsman" value="bat" ng-model="filterCategory.bat"/> <label for="batsman"></label>
+				<!--<span class="icon-filter"></span>-->
+            </div>
+         </li>
+         <div class="rosters-scroll-div">
+            <li class="clearfix" ng-repeat="player in AplPlayers | playerFilter:filterCategory" ng-class="{'blue': player.playerAplTeamId == 1 , 'yellow': player.playerAplTeamId == 2 , 'red': player.playerAplTeamId == 3 , 'green': player.playerAplTeamId == 4}">
+               <button ng-click = "rosterListener(player)">+</button>
+               <img src='../images/bat.png' ng-show="{{player.playerTypeId}}=='1'" class="img-upload"/>
+               <img src='../images/ball.png' ng-show="{{player.playerTypeId}}=='2'" class="img-upload"/>
+               <img src='../images/bat_ball.png' ng-show="{{player.playerTypeId}}=='3'" class="img-upload"/>
+               <span>{{ player.playerName }}</span>					
+               <span class="player-price">${{ player.playerPrice }}</span>
+               <img src='../images/imapact.png' ng-show="{{player.isImpact}}==1" class="img-upload impact-player"/>
+            </li>
+         </div>
+      </ul>
+   </div>
+   <button id="save-players" class="save-players" ng-click="redirectToPlayers()">Submit you team</button>
+   <button id="redet-players" class="reset-players" ng-click="resetPlayers()">Reset</button>
+</div>
+</div>
+<div class="right-section">
+	<div class="leader-board-heading">Popular players</div>
+	<ul class="leader-board-content">
+		<li class="clearfix popular-players" ng-repeat="player in leadingPlayers | limitTo: 8">
+			<img ng-src={{player.playerImage}}/>
+			<span class="scroll-name">{{ player.playerName | limitTo: 13}}{{player.playerName.length > 13 ? '...' : ''}}</span>
+			<span class="scroll-points">{{player.noOfTeams}}#</span>
+		</li>
+	  </ul>
+</div>

@@ -1,0 +1,114 @@
+<link rel="stylesheet" type="text/css" href="css/fixtures.css" >  
+<div class="left-section">	
+	<div class="content-section">
+	   <div class="loading-main history" ng-show="dataLoading">
+		  <img src="../images/loading.gif"/>
+		  <span>Please wait...</span>
+	   </div>
+	   <div class="error-container" ng-show="showError" ng-animate="'fade'">
+		  <p class="error-msg">{{errorMessage}}</p>
+		  <span ng-click="closeError()" class="icon-cancel-circle"></span>
+	   </div>
+		<div class="fixtures">
+			<p class="back back-history" ng-show="isFromLeaderBoard"><a ng-click="backToLeaderBoard()"><span class="icon-circle-left"></span>Back</a></p>
+			<p class="fixture-heading" ng-show="showHeading">History - {{teamName}}</p>
+			<div class="history-tab">
+                <a ng-click = "getRecentMatchHistory(1)" ng-class = "{'activate-underline':result == 1}">Quarter 1<span></span></a>
+                <a ng-click = "getRecentMatchHistory(2)" ng-class = "{'activate-underline':result == 2}">Quarter 2<span></span></a>
+                <a ng-click = "getRecentMatchHistory(3)" ng-class = "{'activate-underline':result == 3}">Quarter 3<span></span></a>
+                <a ng-click = "getRecentMatchHistory(4)" ng-class = "{'activate-underline':result == 4}">Quarter 4<span></span></a>
+            </div>
+            <div class="add-opacity">
+                <ul class="fixtures-schedule">
+                    <li class="clearfix" ng-repeat="content in historyData">
+                        <label>Points : {{content.points}}</label>
+                        <div class="match-teams clearfix">
+                            <img src="images/Hurricanes.png" ng-show="{{content.teamOneName=='Hurricanes'}}"/>
+                            <img src="images/Scorchers.png" ng-show="{{content.teamOneName=='Scorchers'}}"/>
+                            <img src="images/strikers.png" ng-show="{{content.teamOneName=='Strikers'}}"/>
+                            <img src="images/superStar.png" ng-show="{{content.teamOneName=='Super Stars'}}"/>
+
+                            <span>versus</span>
+
+                            <img src="images/Hurricanes.png" ng-show="{{content.teamTwoName=='Hurricanes'}}"/>
+                            <img src="images/Scorchers.png" ng-show="{{content.teamTwoName=='Scorchers'}}"/>
+                            <img src="images/strikers.png" ng-show="{{content.teamTwoName=='Strikers'}}"/>
+                            <img src="images/superStar.png" ng-show="{{content.teamTwoName=='Super Stars'}}"/>
+                        </div>
+                            <label ng-click="viewPlayerHistory(content)" class="center-align"><a class="underline">View Details</a></label>
+                    </li>
+                </ul>
+                <ul class="fixtures-schedule">
+                    <li class="clearfix" ng-repeat="content in currentMatachData" ng-show="{{content.isLocked!=1}}">
+                        <label>Points : 0</label>
+                        <div class="match-teams clearfix">
+                            <img src="images/Hurricanes.png" ng-show="{{content.teamOneId==1}}"/>
+                            <img src="images/Scorchers.png" ng-show="{{content.teamOneId==2}}"/>
+                            <img src="images/strikers.png" ng-show="{{content.teamOneId==3}}"/>
+                            <img src="images/superStar.png" ng-show="{{content.teamOneId==4}}"/>
+
+                            <span>versus</span>
+
+                            <img src="images/Hurricanes.png" ng-show="{{content.teamTwoId==1}}"/>
+                            <img src="images/Scorchers.png" ng-show="{{content.teamTwoId==2}}"/>
+                            <img src="images/strikers.png" ng-show="{{content.teamTwoId==3}}"/>
+                            <img src="images/superStar.png" ng-show="{{content.teamTwoId==4}}"/>
+                        </div>
+                            <label ng-click="viewPlayerHistory(content)" class="center-align"><a class="underline">View Team</a></label>
+                    </li>
+                </ul>
+                <div ng-show="noHistory" class="no-results">
+                    <!--<img src="../images/no-results-found.png"/>-->
+                    <!--<h1 class='elegantshadow'>No Results Found</h1>-->
+                    <div class="slashed">
+                      <div title="No Results Found" class="top"></div>
+                      <div title="No Results Found" class="bot"></div>
+                    </div>
+                </div>
+                <div class="svg-animations" ng-show = "showSvg">
+                    <svg viewBox="0 0 800 600">
+                      <symbol id="s-text">
+                        <text text-anchor="middle"
+                              x="50%"
+                              y="35%"
+                              class="text--line"
+                              >
+                          Upcoming
+                        </text>
+                      </symbol>
+
+                      <g class="g-ants">
+                        <use xlink:href="#s-text"
+                          class="text-copy"></use>     
+                        <use xlink:href="#s-text"
+                          class="text-copy"></use>     
+                        <use xlink:href="#s-text"
+                          class="text-copy"></use>     
+                        <use xlink:href="#s-text"
+                          class="text-copy"></use>     
+                        <use xlink:href="#s-text"
+                          class="text-copy"></use>     
+                      </g>
+                    </svg>
+                </div>
+        </div>
+		</div>
+	</div>
+</div>
+<div class="right-section">
+	<div class="leader-board-heading"><a ng-click="showLeaderBoardCurrent()" id="leaderBoardCurrent" class="active">Leader Board</a><a ng-click="showLeaderBoardOverall()" id="leaderBoardOverall">Overall</a></div>
+	<ul class="leader-board-content" ng-show="leaderBoard">
+		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
+			<img ng-src={{content.imageUrl}}>
+			<span><a class="underline">{{content.teamName}}</a></span>
+			<span>{{content.points}}</span>
+		</li>
+	</ul>
+    <ul class="leader-board-content" ng-show="overall">
+		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
+			<img ng-src={{content.imageUrl}}>
+			<span><a class="underline">{{content.teamName}}</a></span>
+			<span>{{content.points}}</span>
+		</li>
+	</ul>
+</div>

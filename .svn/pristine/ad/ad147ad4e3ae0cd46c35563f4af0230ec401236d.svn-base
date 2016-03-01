@@ -1,0 +1,50 @@
+<link rel="stylesheet" type="text/css" href="css/fixtures.css" >  
+<div class="left-section">
+	<div class="loading-main" ng-show="dataLoading">
+	  <img src="../images/loading.gif"/>
+	  <span>Please wait...</span>
+   </div>
+   <div class="error-container" ng-show="showError" ng-animate="'fade'">
+	  <p class="error-msg">{{errorMessage}}</p>
+	  <span ng-click="closeError()" class="icon-cancel-circle"></span>
+   </div>
+	<p class="back back-history"><a ng-click="backToFixtures()"><span class="icon-circle-left"></span>Back</a></p>
+	<div class="player-container clearfix">
+		<!--<div class="match-result">{{matchResult}}</div>-->
+		<marquee>{{matchResult}}{{manOfTheMatch}}</marquee>
+		<ul class="left-scroll-content">
+			<li class="team-heading">{{teamOne}}{{teamOneScore}}</li>
+			<li class="clearfix" ng-repeat="player in players">
+				<div class="player-images">
+					<img ng-src={{player.playerImage}}/>
+				</div>
+				<div class="player-scroll-details">
+					<span class="player-name">{{player.playerName | limitTo: 15}}{{player.playerName.length > 18 ? '...' : ''}}</span>
+					<span class="player-points">{{player.points}}</span>
+				</div>
+			</li>
+		  </ul>
+		<ul class="left-scroll-content">
+			<li class="team-heading">{{teamTwo}}{{teamTwoScore}}</li>
+			<li class="clearfix" ng-repeat="player in remainingPlayers">
+				<div class="player-images">
+					<img ng-src={{player.playerImage}}/>
+				</div>
+				<div class="player-scroll-details">
+					<span class="player-name">{{player.playerName | limitTo: 15}}{{player.playerName.length > 18 ? '...' : ''}}</span>
+					<span class="player-points">{{player.points}}</span>
+				</div>
+			</li>
+		  </ul>
+	</div>
+</div>
+<div class="right-section">
+	<div class="leader-board-heading">Leader Board</div>
+	<ul class="leader-board-content">
+		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
+			<img ng-src={{content.imageUrl}}>
+			<span><a class="underline">{{content.teamName}}</a></span>
+			<span>{{content.points}}</span>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,124 @@
+.fixtures{
+	width: 100%;
+	height: auto;
+	margin-top: 25px;
+}
+.fixtures > p{
+	padding: 15px;
+	text-align: center;
+}
+.fixtures .fixtures-details{
+	width: 90%;
+    margin: 0 auto;
+	margin-bottom: 20px;
+}
+.fixtures .fixtures-details p{
+	color:#fff;
+	float: right;
+	font-size: 19px;
+}
+.fixtures .fixtures-details p:first-child{
+	float: left;
+}
+ul.fixtures-schedule{
+	list-style: none;
+	line-height: 2;
+	font-size: 18px;
+	width: 90%;
+	margin: 0 auto;
+	background-color: rgba(31, 31, 31, 0.66);
+}
+ul.fixtures-schedule li:nth-child(even){
+	background-color: rgba(245, 245, 245, 0.09);
+}
+ul.fixtures-schedule li label{
+	width: 30%;
+    float: left;
+    box-sizing: border-box;
+    height: auto;
+    margin: 9px 0px;
+	padding-left: 10px;
+}
+ul.fixtures-schedule li .match-teams{
+	width: 40%;
+	float: left;
+	padding: 5px 0px 0px 10px;
+	box-sizing: border-box;
+	height: auto;
+}
+.match-teams img,.match-teams div{
+	height: 45px;
+	width: 45px;
+	border-radius: 50px;
+}
+ul.fixtures-schedule li > div > span{
+	vertical-align: top;
+	margin: 0px 8%;
+}
+.center-align{
+	text-align: center;
+}
+.fixture-history{
+	margin-top: 40px;
+}
+.fixture-heading{
+	color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.player-container{
+	width: 90%;
+	margin: 0 auto;
+	height: auto;	
+	margin-bottom: 20px;
+}
+.left-scroll-content{
+	width: 50%;
+	float: left;
+	list-style: none;
+	color: #c9c1a2;
+	min-width: 310px;
+}
+.left-scroll-content li{
+	width: 300px;
+    height: 50px;
+	margin: 0 auto;
+    margin-top: 10px;
+    background-color: #333;
+    cursor: pointer;
+}
+.left-scroll-content li.team-heading{
+	background-color: transparent;
+    color: #fff;
+    text-align: center;
+}
+.left-scroll-content li .player-images{
+	float: left;
+	width: 50px;
+}
+.left-scroll-content li .player-images img{
+	width: 50px;
+	height: 50px;
+}
+.player-scroll-details{
+	width: 250px;
+	float: right;
+	position: relative;
+	color: #fff;
+	margin-top: 10px;
+    font-size: 16px;
+	height: 40px;
+}
+.player-scroll-details .player-name{
+	margin-left: 10px;
+}
+.player-scroll-details .player-points{
+	float: right;
+	margin-right: 5px;
+}
+marquee{
+	padding: 15px;
+	color: #fff;
+    font-size: 18px;
+}

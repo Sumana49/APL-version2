@@ -1,0 +1,51 @@
+<link rel="stylesheet" type="text/css" href="css/leader.css" >  
+<div class="left-section">
+	<div class="loading-main" ng-show="dataLoading">
+	  <img src="../images/loading.gif"/>
+	  <span>Please wait...</span>
+   </div>
+   <div class="error-container" ng-show="showError" ng-animate="'fade'">
+	  <p class="error-msg">{{errorMessage}}</p>
+	  <span ng-click="closeError()" class="icon-cancel-circle"></span>
+   </div>
+	<div class="parent">
+		<div>
+			<div class="leader-board-heading">Leader Board
+				<span ng-show="!search" class="icon-search" ng-click = "showSearch()"></span>
+				<span class="hide-icon" ng-click = "hideSearch()"><img ng-show="search" src="../images/hide-icon.png"/></span>
+				<input ng-show="search" type="search" ng-model = "searchText" placeholder="Search" class = "search-animation"/>
+			</div>
+			<div class="table-unique-header">
+				<table class="main-leader-page">
+					<tr>
+						<th>Team</th>
+						<th>Owner Name</th>
+						<th>Points</th>
+						<th>Rank</th>
+					</tr>
+				</table>
+			</div>
+			<div class="leader-board-scrollableDiv">
+				<table class="main-leader-page">
+					<tr ng-repeat="content in leaderBoardContent | filter:searchText" ng-click="getLeaderBoardTeamDetails(content)">
+						<td ng-show={{content.imageUrl!=null}}><img  ng-src="{{content.imageUrl}}"/><a>{{content.teamName}}</a></td>
+						<td  ng-show={{content.imageUrl==null}}><img   ng-src="../images/man.jpg"/><a>{{content.teamName}}</a></td>
+						<td><a>{{content.ownerName}}</a></td>
+						<td><a>{{content.points}}</a></td>
+						<td><a>{{$index+1}}</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="right-section">
+	<div class="leader-board-heading">Point stealers</div>
+	<ul class="leader-board-content">
+		<li class="clearfix popular-players" ng-repeat="player in leadingPlayers | limitTo: 8">
+			<img ng-src={{player.playerImage}}/>
+			<span class="scroll-name">{{ player.playerName | limitTo: 13}}{{player.playerName.length > 13 ? '...' : ''}}</span>
+			<span class="scroll-points">{{player.points}}</span>
+		</li>
+	  </ul>
+</div>
