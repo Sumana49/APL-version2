@@ -80,7 +80,7 @@ var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$statePar
                     if(response.data.length == 0){
                         noHistoryFlag = true;
                         $scope.noHistory = true;
-                        $scope.showHeading = false;
+                        //$scope.showHeading = false;
                     }
                 }
                 else{
@@ -88,7 +88,7 @@ var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$statePar
                     $scope.dataLoading = false;
                     $(".add-opacity").removeClass("opacity");
                     $scope.noHistory = true;
-                    $scope.showHeading = false;
+                    //$scope.showHeading = false;
                 }
             }).error(function(response, status, headers, config) {
                     errorDisplay(error.SERVICE_FAILURE);
@@ -110,7 +110,7 @@ var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$statePar
 				//$scope.showHeading = true;
 				if(noHistoryFlag && response.data.length == 0){
 					$scope.noHistory = true;
-					$scope.showHeading = false;
+					//$scope.showHeading = false;
 				}
 			}
 			else{

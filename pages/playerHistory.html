@@ -35,7 +35,8 @@
 	</div>
 </div>
 <div class="right-section">
-	<div class="leader-board-heading"><a ng-click="showLeaderBoardCurrent()" id="leaderBoardCurrent" class="active">Leader Board</a><a ng-click="showLeaderBoardOverall()" id="leaderBoardOverall">Overall</a></div>
+    <div class="leader-title">Leader Board</div>
+	<div class="leader-board-heading"><a ng-click="showLeaderBoardCurrent()" id="leaderBoardCurrent" class="active">Current</a><a ng-click="showLeaderBoardOverall()" id="leaderBoardOverall">Overall</a></div>
 	<ul class="leader-board-content" ng-show="leaderBoard">
 		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
 			<img ng-src={{content.imageUrl}}>

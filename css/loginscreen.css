@@ -2,7 +2,7 @@ nav,.right-section,.login{
         display:none !important;  
 }
 .background-pic{
-    background : url("../images/world-cup-winning.jpg")
+   /* background : url("../images/world-cup-winning.jpg");*/
 }
 .homescreen{
     display:block;
@@ -35,7 +35,7 @@ video {
     z-index: -100;
     transform: translateX(-50%) translateY(-50%);
 	/*background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;*/
-    background: url('../images/world-cup-winning.jpg') no-repeat;
+    /*background: url('../images/world-cup-winning.jpg') no-repeat;*/
 	background-size: cover;
 	transition: 1s opacity;
 	/*opacity: 0.5;*/
@@ -90,7 +90,9 @@ a:hover{
   background:rgba(0,0,0,0.9);
 }
 @media screen and (max-device-width: 800px) {
-  html { background: url(../images/world-cup-winning.jpg) #000 no-repeat center center fixed; }
+  html { 
+     /*background: url(../images/world-cup-winning.jpg) #000 no-repeat center center fixed; */
+   }
   #bgvid { display: none; }
 }
 

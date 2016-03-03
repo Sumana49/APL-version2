@@ -37,7 +37,7 @@
                             <td  ng-show={{content.imageUrl==null}}><img   ng-src="../images/man.jpg"/><a>{{content.teamName}}</a></td>
                             <td><a>{{content.ownerName}}</a></td>
                             <td><a>{{content.points}}</a></td>
-                            <td><a>{{$index+1}}</a></td>
+                            <td><a>{{leaderBoardContent.indexOf(content)+1}}</a></td>
                         </tr>
                     </table>
                 </div>

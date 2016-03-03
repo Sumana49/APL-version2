@@ -310,19 +310,19 @@ aplapp.service('matchService',function() {
 aplapp.service('VideoControl',function() {
 	return{
 		play : function(){
-			$('#bgvid').get(0).play();
+			//$('#bgvid').get(0).play();
             return "play";
 		},
         pause : function(){
-			$('#bgvid').get(0).pause();
+			//$('#bgvid').get(0).pause();
             return "pause";
 		},
         mute : function(){
-            $('#bgvid').get(0).muted = false;
+           // $('#bgvid').get(0).muted = false;
 			return "mute";
         },
 	    unmute : function(){
-            $('#bgvid').get(0).muted = true;
+            //$('#bgvid').get(0).muted = true;
 			return "unmute";
         },
 };

@@ -1417,6 +1417,12 @@ a.underline:hover:before {
 .homescreen{
     display:none;   
 }
+.leader-title{
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #f5f5f5;
+}
 .no-results{
 	text-align: center;
 	margin-top: 75px;
