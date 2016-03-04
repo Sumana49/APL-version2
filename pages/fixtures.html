@@ -67,7 +67,7 @@
 		</li>
 	</ul>
     <ul class="leader-board-content" ng-show="overall">
-		<li class="clearfix" ng-repeat="content in leaderBoardContent | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
+		<li class="clearfix" ng-repeat="content in leaderBoardContentAll | limitTo: 7" ng-click="getLeaderBoardTeamDetails(content)">
 			<img ng-src={{content.imageUrl}}>
 			<span><a class="underline">{{content.teamName}}</a></span>
 			<span>{{content.points}}</span>

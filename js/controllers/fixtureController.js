@@ -112,18 +112,18 @@ var fixtureCtrl = function($scope,$http,http_defaults,$state,$rootScope,$cookieS
         $scope.leaderBoard = false;
         $scope.overall = true;
         $("#leaderBoardCurrent").removeClass("active");
-        $("#leaderBoardOverall").addClass("active");
 		leaderBoard.getLeaderBoard("all").then(function(data){
-          $scope.leaderBoardContent = data;  
+          $scope.leaderBoardContentAll = data; 
+          $("#leaderBoardOverall").addClass("active");
         });
     };
     function showLeaderBoardCurrent(){
         $scope.overall = false;
         $scope.leaderBoard = true;
         $("#leaderBoardOverall").removeClass("active");
-        $("#leaderBoardCurrent").addClass("active");
 		leaderBoard.getLeaderBoard($scope.quarter).then(function(data){
-          $scope.leaderBoardContent = data;  
+          $scope.leaderBoardContent = data;
+          $("#leaderBoardCurrent").addClass("active");  
         });
     };
 }
