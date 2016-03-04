@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/loginscreen.css">
 <div class="homevideo">
     <form name="form" ng-submit="login()" role="form">
         <div class="form-group">
@@ -7,7 +8,7 @@
             <input ng-focus="removeBorder()" type="password" name="password" id="password" class="form-control" placeholder="Password" ng-model="password" required/>
         </div>
         <div class="form-actions clearfix">
-            <button type="submit" class="floatLeft btn btn-danger">Login</button>
+            <input type="submit" class="floatLeft btn btn-danger" value="Login"/>
             <a href="#/register" class="floatRight btn btn-link">Register</a>
         </div>
         <div class="forgot-password">
@@ -19,4 +20,3 @@
     </form>
                    
 </div>
-<link rel="stylesheet" type="text/css" href="css/loginscreen.css">

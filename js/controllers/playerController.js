@@ -12,6 +12,7 @@ var playerCtrl = function($scope,$http,http_defaults,$state,$stateParams,Authent
 	$scope.analytics = analytics;    
     $scope.leaderBoard = true;
     $scope.overall = false;
+    $scope.selectPlayersLink = false;
     $scope.getCurrentQuarter = getCurrentQuarter;
     $scope.showLeaderBoardCurrent = showLeaderBoardCurrent;
     $scope.showLeaderBoardOverall = showLeaderBoardOverall;
@@ -52,13 +53,18 @@ var playerCtrl = function($scope,$http,http_defaults,$state,$stateParams,Authent
         $http({method:'GET',url:URLBASE + "getUserFantasyTeam",params:{teamId:teamId}},http_defaults).success(function(response) {
 			if(response.type == "success"){
 				 $scope.dataLoading = false;
+                 $scope.selectPlayersLink = false;
                  var data = response.data.teamDetails;
-			     $scope.fantasyTeam = data;
+                 if(data.length == 0)  
+                    $scope.selectPlayersLink = true;
+                 else{
+			         $scope.fantasyTeam = data;
+                     $scope.selectPlayersLink = false;
+                 }
 				 $scope.dataLoading = false;
             }else{
                 $scope.fantasyTeam = [];
 				$scope.dataLoading = false;
-                $scope.dataLoading = false;
             }
 		}).error(function(response, status, headers, config) {
 				errorDisplay(error.SERVICE_FAILURE);

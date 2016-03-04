@@ -16,6 +16,7 @@ var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$statePar
     $scope.showSvg = false;
 	var leaderBoardCredentials,teamId,key;
 	var noHistoryFlag = false;
+    $scope.availableHistory = true;
 	var error = {
 		SERVICE_FAILURE : "Something went wrong. Please try again in sometime",
         NOT_STARTED : "Quarter not yet started"
@@ -52,6 +53,7 @@ var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$statePar
 	}
 	
 	function getRecentMatchHistory(quarterId){
+        $scope.availableHistory = true;
 		getLeaderBoardCredentials();
         $scope.result = quarterId;
 		if(Object.keys(leaderBoardCredentials).length == 0){
@@ -84,10 +86,13 @@ var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$statePar
                     }
                 }
                 else{
+                    $(".add-opacity").addClass("opacity");
+                    $scope.availableHistory = false;
                     $scope.historyData = [];
-                    $scope.dataLoading = false;
-                    $(".add-opacity").removeClass("opacity");
+                    $(".add-opacity").removeClass("opacity");;
+                    $scope.showSvg = false;
                     $scope.noHistory = true;
+                    $scope.dataLoading = false;
                     //$scope.showHeading = false;
                 }
             }).error(function(response, status, headers, config) {
@@ -95,11 +100,13 @@ var historyCtrl = function($scope,$http,$state,$rootScope,$cookieStore,$statePar
             });
         }
         else{
+            $(".add-opacity").addClass("opacity");
+            $scope.availableHistory = false;
             $scope.historyData = [];
-            $scope.dataLoading = false;
             $(".add-opacity").removeClass("opacity");
             $scope.noHistory = false;
             $scope.showSvg = true;
+            $scope.dataLoading = false;
         }
 	};
 	function getCurrentMatchData(noHistoryFlag){

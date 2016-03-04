@@ -24,7 +24,7 @@ var registerCtrl = function ($scope, $rootScope, $location, AuthenticationServic
 			}
 			else{
 				$scope.errorMesssageDisplay = true;
-				$scope.error = "Please enter a valid Avnet e-mail id";
+				$scope.error = "Please enter a valid sirius mail id";
 			}				
         };
 	//Remove border

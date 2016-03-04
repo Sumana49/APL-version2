@@ -15,6 +15,9 @@ nav,.right-section,.login{
     margin-bottom: 5px;	
     background-color: rgba(31, 31, 31, 0.66);
 }
+.homevideo input[type="submit"]{
+    padding: 5px 8px;
+}
 .help-block{
     color:#F7F4C4;   
 }
@@ -44,12 +47,11 @@ video {
 .stopfade { 
    opacity: .5;
 }
-
 .homevideo {     
 	color: white;
     padding: 2rem;
     width: 33%;
-    float: right;
+    margin: 0 24%;
 	background-color: rgba(31, 31, 31, 0.2);
 }
 h1 {
@@ -57,7 +59,7 @@ h1 {
 }
 .homevideo button, .btn { 
 	display: block;
-	width: auto;
+	width: auto !important;
 	border: none; 
 	margin: 1rem auto; 
 	font-size: 1.3rem;

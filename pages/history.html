@@ -19,7 +19,7 @@
                 <a ng-click = "getRecentMatchHistory(4)" ng-class = "{'activate-underline':result == 4}">Quarter 4<span></span></a>
             </div>
             <div class="add-opacity">
-                <ul class="fixtures-schedule">
+                <ul class="fixtures-schedule" ng-show="availableHistory">
                     <li class="clearfix" ng-repeat="content in historyData">
                         <label>Points : {{content.points}}</label>
                         <div class="match-teams clearfix">

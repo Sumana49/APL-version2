@@ -206,7 +206,7 @@ nav{
 	display: none;
 }
 .side-nav li:hover,.side-nav li:active{
-	color: rgb(188, 35, 35);
+	color: rgb(252, 125, 12);
 }  
 .current-link{
 	color: rgb(188, 35, 35);
@@ -333,7 +333,7 @@ section > div{
     bottom: 4px;
     display: none; 
     font-size: 16px;
-    color: #7E0115;
+    color: #FC7D0C;
 }
 .my-profile > span{
 	float: right;
@@ -402,7 +402,7 @@ input[type="text"],input[type="password"],input[type="email"], select{
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
 button{
-	background: #5CCD00;
+    background: #5CCD00;
 	background: -moz-linear-gradient(top,#477C1C  0%,#4AA400 100%);
 	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#477C1C ),color-stop(100%,#4AA400));
 	background: -webkit-linear-gradient(top,#477C1C  0%,#4AA400 100%);
@@ -419,6 +419,12 @@ button{
 	border: 1px solid #459A00;
 	text-shadow: 1px 2px rgba(84, 78, 78, 0.18);
 	cursor: pointer;
+}
+.create-icon.main-link.select-team{
+    padding:5px 10px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 button.save-players, button.reset-players{
     border: none;
